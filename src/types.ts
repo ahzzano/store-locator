@@ -17,3 +17,9 @@ export interface City {
     id: number;
 }
 
+export interface Book {
+    name: string;
+    author: string;
+    id: number
+}
+
