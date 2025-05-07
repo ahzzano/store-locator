@@ -8,6 +8,7 @@ export interface Item {
     name: string;
     price: number;
     shop: Shop;
+    category: string;
     id: number;
 }
 
