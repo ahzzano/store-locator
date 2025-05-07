@@ -19,20 +19,15 @@
 
 		return resolvedShops;
 	});
-
-	async function removeShop(shop: Shop) {
-		try {
-			await db.shops.delete(shop.id);
-		} catch {}
-	}
 </script>
 
-<AddCity />
-<AddShop />
-
-Shops
 {#if $shops}
 	<div class="flex flex-col w">
+		<div class="flex w-full gap-2 p-2 bg-base-300">
+			<span class="w-2/3"> Shop </span>
+			<span class="w-1/3 sm:block hidden">City</span>
+		</div>
+
 		{#each $shops as shop}
 			<ShopEntry {shop} />
 		{/each}
