@@ -20,9 +20,9 @@
 	}
 </script>
 
-<form onsubmit={addItem} class="flex flex-col">
+<form onsubmit={addItem} class="flex flex-col gap-2">
 	<input bind:value={itemName} class="input" placeholder="name" />
 	<input bind:value={itemCategory} class="input" placeholder="category" />
 	<input bind:value={itemPrice} type="number" class="input" placeholder="price" />
-	<button type="submit">Add Item</button>
+	<button type="submit" class="btn">Add Item</button>
 </form>
