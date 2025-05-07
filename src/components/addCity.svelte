@@ -13,5 +13,5 @@
 
 <form on:submit={addCity}>
 	<input type="text" bind:value={cityName} required />
-	<button type="submit" class="bg-amber-50"> Add City </button>
+	<button type="submit"> Add City </button>
 </form>
