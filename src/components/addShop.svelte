@@ -23,8 +23,8 @@
 <span>City</span>
 <form on:submit={addShop}>
 	<span>Shop Name</span>
-	<input type="text" bind:value={shopName} />
-	<select class="dropdown" bind:value={shopCity}>
+	<input type="text" bind:value={shopName} class="input" />
+	<select class="select-ghost" bind:value={shopCity}>
 		{#each $cities as city}
 			<option value={city.id}>{city.name}</option>
 		{/each}

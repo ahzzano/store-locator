@@ -12,6 +12,6 @@
 </script>
 
 <form on:submit={addCity}>
-	<input type="text" bind:value={cityName} required />
+	<input type="text" bind:value={cityName} required class="input" />
 	<button type="submit"> Add City </button>
 </form>
