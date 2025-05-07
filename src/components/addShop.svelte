@@ -2,11 +2,13 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '../db';
 	import type { City } from '../types';
+	import Modal from './modal.svelte';
 
 	let shopName = '';
 	let shopCity = 0;
 
 	let cities = liveQuery(() => db.cities.toArray());
+	let showModal = $state(false);
 
 	async function addShop() {
 		try {
@@ -20,14 +22,16 @@
 	}
 </script>
 
-<span>City</span>
-<form on:submit={addShop}>
+<form onsubmit={addShop}>
 	<span>Shop Name</span>
 	<input type="text" bind:value={shopName} class="input" />
-	<select class="select-ghost" bind:value={shopCity}>
+	<select class="select" bind:value={shopCity}>
 		{#each $cities as city}
 			<option value={city.id}>{city.name}</option>
 		{/each}
 	</select>
 	<button type="submit"> Add </button>
 </form>
+
+<button onclick={(showModal = true)}> Hello</button>
+<Modal bind:showModal>Add City Time</Modal>

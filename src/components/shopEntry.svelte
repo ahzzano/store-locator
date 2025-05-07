@@ -11,8 +11,15 @@
 	let showModal = $state(false);
 
 	let categories = liveQuery(async () => {
-		const res = db.items.orderBy('category').uniqueKeys();
-		return res;
+		const res = await db.items.toArray();
+		const filtered = res.filter((item) => {
+			return item.shop == shop.id;
+		});
+
+		const categories = new Set(filtered.map((items) => items.category));
+		console.log(categories);
+
+		return categories;
 	});
 	let selectedCategory = $state('all');
 
@@ -45,9 +52,9 @@
 	}
 </script>
 
-<div class="flex w-full gap-2">
+<div class="flex w-full gap-2 pr-5 pl-5">
 	<button
-		class="w-2/3"
+		class="w-2/3 text-left btn-ghost"
 		onclick={() => {
 			showModal = true;
 			selectedShop = shop.id;
@@ -55,9 +62,9 @@
 	>
 		{shop.name}
 	</button>
-	<span class="w-1/3">{shop.city.name}</span>
+	<span class="w-1/3 sm:block hidden">{shop.city.name}</span>
 	<button
-		class="w-1/10"
+		class="w-1/10 btn"
 		onclick={async () => {
 			await removeShop(shop);
 		}}>Remove</button
@@ -72,25 +79,27 @@
 	{/snippet}
 
 	Items
-	<div class="flex">
+	<div class="flex flex-col sm:flex-row">
 		<div class="w-2/3">
 			<div class="flex gap-2">
 				{#if $items && $items.length > 0}
 					{#if $categories && $categories.length != 0}
-						<button
-							onclick={() => {
-								selectedCategory = 'all';
-							}}>all</button
-						>
-						{#each $categories as cat}
+						<div class="justify-center items-center flex gap-4">
 							<button
 								onclick={() => {
-									selectedCategory = cat;
-								}}
+									selectedCategory = 'all';
+								}}>all</button
 							>
-								{cat}
-							</button>
-						{/each}
+							{#each $categories as cat}
+								<button
+									onclick={() => {
+										selectedCategory = cat;
+									}}
+								>
+									{cat}
+								</button>
+							{/each}
+						</div>
 					{/if}
 				{/if}
 			</div>
@@ -98,9 +107,9 @@
 				{#if $items && $items.length > 0}
 					<div class="flex flex-col">
 						{#each $items as item}
-							<div class="flex gap-2 w-full">
-								<span class="w-3/5">{item.name}</span>
-								<span class="w-1/5">{item.price}</span>
+							<div class="flex gap-2 w-full sm:pl-10 sm:pr-10">
+								<span class="sm:w-1/2 w-3/5">{item.name}</span>
+								<span class="sm:w-1/2 w-1/5">{item.price}</span>
 								<button
 									onclick={() => {
 										removeItem(item);
@@ -117,7 +126,6 @@
 		</div>
 		<div class="border-l-gray-500 border-1 ml-2 mr-4 border-dashed" />
 		<div class="w-1/3">
-			Add Item
 			<AddItem itemShop={shop.id} />
 		</div>
 	</div>

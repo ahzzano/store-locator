@@ -11,7 +11,7 @@
 	let cityName = '';
 </script>
 
-<form on:submit={addCity}>
-	<input type="text" bind:value={cityName} required class="input" />
-	<button type="submit"> Add City </button>
+<form on:submit={addCity} class="flex flex-col items-center gap-5">
+	<input type="text" bind:value={cityName} required class="input w-2/3" placeholder="City Name" />
+	<button type="submit" class="btn"> Add </button>
 </form>
