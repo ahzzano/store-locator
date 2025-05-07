@@ -53,23 +53,27 @@
 	}
 </script>
 
-<div class="flex w-full gap-2 pr-5 pl-5 justify-center items-center">
+<div class="list-row gap-4 w-full">
+	<div class="w-full">
+		<div class="w-full text-lg" role="button" onclick={() => (showModal = true)}>{shop.name}</div>
+		<div class="text-xs">{shop.city.name}</div>
+	</div>
+
 	<button
-		class="w-2/3 text-left btn-ghost"
-		onclick={() => {
-			showModal = true;
-			selectedShop = shop.id;
-		}}
-	>
-		{shop.name}
-	</button>
-	<span class="w-1/3 sm:block hidden">{shop.city.name}</span>
-	<button
-		class="w-1/7 sm:w-1/10 btn"
+		class="ml-auto btn-ghost ml-10"
 		onclick={async () => {
 			await removeShop(shop);
-		}}>Remove</button
+		}}
 	>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			viewBox="0 0 448 512"
+			class="stroke-white fill-white size-[1.5em]"
+			><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path
+				d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+			/>
+		</svg>
+	</button>
 </div>
 
 <Modal bind:showModal>
@@ -84,17 +88,28 @@
 		<div class="w-full sm:w-2/3">
 			<div class="flex flex-col overflow-auto max-h-9/10">
 				{#if $items && $items.length > 0}
-					<div class="flex flex-col">
+					<div class="list">
 						{#each $items as item}
-							<div class="flex gap-2 w-full sm:pl-10 sm:pr-10">
-								<span class="sm:w-1/2 w-3/5">{item.name}</span>
-								<span class="sm:w-1/2 w-1/5">{item.price}</span>
+							<div class="list-row gap-2 w-full sm:pl-10 sm:pr-10">
+								<div class="w-full">
+									<div class="font-bold">{item.name}</div>
+									<div class="text-xs">{item.price}</div>
+								</div>
 								<button
 									onclick={() => {
 										removeItem(item);
 									}}
-									class="btn">Remove</button
+									class="btn btn-ghost ml-auto"
 								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										viewBox="0 0 448 512"
+										class="stroke-white fill-white size-[1.5em]"
+										><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path
+											d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"
+										/>
+									</svg>
+								</button>
 							</div>
 						{/each}
 					</div>

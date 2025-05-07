@@ -23,7 +23,7 @@
 </script>
 
 <form onsubmit={addShop} class="flex flex-col gap-2">
-	<input type="text" bind:value={shopName} class="input" placeholder="shop name" />
+	<input type="text" bind:value={shopName} class="input" placeholder="Shop Name" />
 	<select class="select" bind:value={shopCity} placeholder="city">
 		{#each $cities as city}
 			<option value={city.id}>{city.name}</option>
