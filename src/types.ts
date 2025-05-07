@@ -1,6 +1,7 @@
 export interface Shop {
-    city: City
     id: number
+    city: City
+    name: string
 }
 
 export interface Item {
