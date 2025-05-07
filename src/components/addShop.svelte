@@ -22,16 +22,12 @@
 	}
 </script>
 
-<form onsubmit={addShop}>
-	<span>Shop Name</span>
-	<input type="text" bind:value={shopName} class="input" />
-	<select class="select" bind:value={shopCity}>
+<form onsubmit={addShop} class="flex flex-col gap-2">
+	<input type="text" bind:value={shopName} class="input" placeholder="shop name" />
+	<select class="select" bind:value={shopCity} placeholder="city">
 		{#each $cities as city}
 			<option value={city.id}>{city.name}</option>
 		{/each}
 	</select>
-	<button type="submit"> Add </button>
+	<button type="submit" class="btn"> Add </button>
 </form>
-
-<button onclick={(showModal = true)}> Hello</button>
-<Modal bind:showModal>Add City Time</Modal>

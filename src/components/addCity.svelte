@@ -12,6 +12,6 @@
 </script>
 
 <form on:submit={addCity} class="flex flex-col items-center gap-5">
-	<input type="text" bind:value={cityName} required class="input w-2/3" placeholder="City Name" />
+	<input type="text" bind:value={cityName} required class="input w-full" placeholder="City Name" />
 	<button type="submit" class="btn"> Add </button>
 </form>

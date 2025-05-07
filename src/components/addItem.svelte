@@ -21,9 +21,9 @@
 </script>
 
 <form onsubmit={addItem} class="flex flex-col gap-2">
-	<span class="text-center w-full"> Add Item </span>
-	<input bind:value={itemName} class="input" placeholder="name" />
-	<input bind:value={itemCategory} class="input" placeholder="category" />
-	<input bind:value={itemPrice} type="number" class="input" placeholder="price" />
+	<span class="text-center w-full hidden sm:block"> Add Item </span>
+	<input bind:value={itemName} class="input w-full" placeholder="name" />
+	<input bind:value={itemCategory} class="input w-full" placeholder="category" />
+	<input bind:value={itemPrice} type="number " class="input w-full" placeholder="price" />
 	<button type="submit" class="btn">Add</button>
 </form>
