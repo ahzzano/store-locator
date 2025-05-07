@@ -4,14 +4,16 @@
 	import type { City } from '../types';
 
 	let shopName = '';
-	let shopCity = '';
+	let shopCity = 0;
 
 	let cities = liveQuery(() => db.cities.toArray());
 
 	async function addShop() {
 		try {
-			const city = await db.cities.where('name').startsWith(shopCity);
-			console.log(city);
+			const shopId = db.shops.add({
+				city: shopCity,
+				name: shopName
+			});
 		} catch (e) {
 			console.log(e);
 		}
@@ -23,7 +25,7 @@
 	<label>Shop Name</label>
 	<input type="text" bind:value={shopName} />
 	<!-- <input type="text" bind:value={shopCity} /> -->
-	<select class="dropdown">
+	<select class="dropdown" bind:value={shopCity}>
 		{#each $cities as city}
 			<option value={city.id}>{city.name}</option>
 		{/each}
