@@ -12,7 +12,7 @@ export const db = new Dexie('Shops') as Dexie & {
 db.version(1).stores({
     cities: '++id, name',
     shops: '++id, cityId, name',
-    items: '++id, name, shopId, price',
+    items: '++id, name, shopId, price, category',
     books: '++id, name, author'
 });
 
