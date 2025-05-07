@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { liveQuery } from 'dexie';
 	import AddShop from '../components/addShop.svelte';
+	import AddCity from '../components/addCity.svelte';
+
+	import { liveQuery } from 'dexie';
 	import { db } from '../db';
 	import type { Shop } from '../types';
 
-	let cityName = '';
 	let shops = liveQuery(async () => {
 		const shops = await db.shops.toArray();
 		const resolvedShops = await Promise.all(
@@ -17,39 +18,25 @@
 		return resolvedShops;
 	});
 
-	async function addCity() {
-		console.log(cityName);
-		try {
-			const city = await db.cities.add({ name: cityName });
-			console.log(city);
-		} catch {}
-	}
-
-	async function removeShop(shop: Shop) {
+	async function removeShop(shop: Shop & { id }) {
 		try {
 			await db.shops.delete(shop.id);
 		} catch {}
 	}
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-
-<form on:submit={addCity}>
-	<input type="text" bind:value={cityName} required />
-	<button type="submit" class="bg-amber-50"> Add City </button>
-</form>
-
+<AddCity />
 <AddShop />
 
 Shops
 {#if $shops}
 	<div class="flex flex-col w">
 		{#each $shops as shop}
-			<div class="flex gap-5">
-				<span>{shop.name}</span>
-				<span>{shop.city.name}</span>
+			<div class="flex w-full gap-2">
+				<span class="w-1/2">{shop.name}</span>
+				<span class="w-1/3">{shop.city.name}</span>
 				<button
+					class="w-1/10"
 					on:click={async () => {
 						await removeShop(shop);
 					}}>Remove</button
