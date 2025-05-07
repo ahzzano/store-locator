@@ -21,6 +21,7 @@
 
 		return categories;
 	});
+
 	let selectedCategory = $state('all');
 
 	let items = liveQuery(async () => {
@@ -52,7 +53,7 @@
 	}
 </script>
 
-<div class="flex w-full gap-2 pr-5 pl-5">
+<div class="flex w-full gap-2 pr-5 pl-5 justify-center items-center">
 	<button
 		class="w-2/3 text-left btn-ghost"
 		onclick={() => {
@@ -64,7 +65,7 @@
 	</button>
 	<span class="w-1/3 sm:block hidden">{shop.city.name}</span>
 	<button
-		class="w-1/10 btn"
+		class="w-1/7 sm:w-1/10 btn"
 		onclick={async () => {
 			await removeShop(shop);
 		}}>Remove</button
@@ -73,37 +74,15 @@
 
 <Modal bind:showModal>
 	{#snippet header()}
-		<span>
+		<span class="text-3xl font-bold">
 			{shop.name}
 		</span>
 	{/snippet}
 
-	Items
+	<span class="text-xl mb-2">Items</span>
 	<div class="flex flex-col sm:flex-row">
-		<div class="w-2/3">
-			<div class="flex gap-2">
-				{#if $items && $items.length > 0}
-					{#if $categories && $categories.length != 0}
-						<div class="justify-center items-center flex gap-4">
-							<button
-								onclick={() => {
-									selectedCategory = 'all';
-								}}>all</button
-							>
-							{#each $categories as cat}
-								<button
-									onclick={() => {
-										selectedCategory = cat;
-									}}
-								>
-									{cat}
-								</button>
-							{/each}
-						</div>
-					{/if}
-				{/if}
-			</div>
-			<div class="flex flex-col">
+		<div class="w-full sm:w-2/3">
+			<div class="flex flex-col overflow-auto max-h-9/10">
 				{#if $items && $items.length > 0}
 					<div class="flex flex-col">
 						{#each $items as item}
@@ -120,12 +99,12 @@
 						{/each}
 					</div>
 				{:else}
-					<span class="w-full text-center pt-5"> No items </span>
+					<span class="w-full text-center pt-5 pb-10 sm:pb-0"> No items </span>
 				{/if}
 			</div>
 		</div>
-		<div class="border-l-gray-500 border-1 ml-2 mr-4 border-dashed" />
-		<div class="w-1/3">
+		<div class="hidden sm:block border-l-gray-500 border-1 ml-2 mr-4 border-dashed" />
+		<div class="w-full sm:w-1/3">
 			<AddItem itemShop={shop.id} />
 		</div>
 	</div>
