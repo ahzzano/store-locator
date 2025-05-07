@@ -1,6 +1,6 @@
 export interface Shop {
     id: number
-    city: City
+    city: City | null
     name: string
 }
 
