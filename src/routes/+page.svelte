@@ -6,7 +6,6 @@
 	import { db } from '../db';
 	import type { Shop } from '../types';
 	import ShopEntry from '../components/shopEntry.svelte';
-	import AddItem from '../components/addItem.svelte';
 
 	let shops = liveQuery(async () => {
 		const shops = await db.shops.toArray();
@@ -21,8 +20,6 @@
 		return resolvedShops;
 	});
 
-	let items = liveQuery(async () => db.items.toArray());
-
 	async function removeShop(shop: Shop) {
 		try {
 			await db.shops.delete(shop.id);
@@ -32,7 +29,6 @@
 
 <AddCity />
 <AddShop />
-<AddItem />
 
 Shops
 {#if $shops}
@@ -43,11 +39,4 @@ Shops
 	</div>
 {:else}
 	No Shops Available
-{/if}
-
-{#if $items}
-	{#each $items as item}
-		{item.name}
-		{item.shop}
-	{/each}
 {/if}
