@@ -10,15 +10,15 @@
 		const shops = await db.shops.toArray();
 		const resolvedShops = await Promise.all(
 			shops.map(async (shop) => {
-				const city = await db.cities.get(shop.city); // Get the related city by cityId
-				return { ...shop, city }; // Return the shop with city info attached
+				const city = await db.cities.get(shop.city);
+				return { ...shop, city };
 			})
 		);
 
 		return resolvedShops;
 	});
 
-	async function removeShop(shop: Shop & { id }) {
+	async function removeShop(shop: Shop) {
 		try {
 			await db.shops.delete(shop.id);
 		} catch {}
