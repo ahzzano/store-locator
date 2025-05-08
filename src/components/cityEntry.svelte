@@ -23,16 +23,16 @@
 		</button>
 
 		<div class="menu dropdown-content w-52 p-4 bg-base-100">
-			<button onclick={() => db.cities.delete(city.id)} class=""> Delete</button>
 			<div class="dropdown dropdown-left w-full">
-				<button>Edit Name</button>
-				<div class="dropdown-content w-52 p-4 bg-base-100">
+				<button class="btn-ghost">Edit Name</button>
+				<div class="menu dropdown-content w-52 p-4 bg-base-100">
 					<form onsubmit={db.cities.update(city.id, { name: newCityName })}>
 						<input class="input" type="text" bind:value={newCityName} placeholder="City Name" />
-						<button type="submit btn btn-soft w-full">Update</button>
+						<button type="submit" class="btn btn-soft w-full text-center">Update</button>
 					</form>
 				</div>
 			</div>
+			<button onclick={() => db.cities.delete(city.id)} class="btn-ghost text-left"> Delete</button>
 		</div>
 	</div>
 </div>

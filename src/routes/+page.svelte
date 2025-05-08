@@ -35,7 +35,17 @@
 	let cities = liveQuery(async () => db.cities.toArray());
 	let citiesCount = liveQuery(async () => db.cities.count());
 	let itemCount = liveQuery(async () => db.items.count());
-	console.log(citiesCount);
+
+	let mostExpensiveItem = liveQuery(async () =>
+		(await db.items.toArray()).reduce((acc, item) => {
+			const { price } = item;
+			if (acc.price < price) {
+				return item;
+			} else {
+				return acc;
+			}
+		})
+	);
 </script>
 
 <div class="sm:w-full w-3/5 sm:ml-0">
@@ -58,6 +68,11 @@
 					<div class="stat">
 						<div class="stat-title">You Catalogued</div>
 						<div class="stat-value">{$itemCount}</div>
+						<div class="stat-desc">items</div>
+					</div>
+					<div class="stat">
+						<div class="stat-title">The most expensive was</div>
+						<div class="stat-value">{$mostExpensiveItem}</div>
 						<div class="stat-desc">items</div>
 					</div>
 				</div>
